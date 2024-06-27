@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>lino e serginho</title>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <img src="imagens/card1.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <p class="desc"><span id="nomedesc" class="nomedesc">Drinks na praia em Positano</span><br>
+          <span class="preco" id="valorpreco">R$ 120,00</span></p>
+          <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#janelamodal" id="comprar">Comprar</button>
+        </div>
+    </div>
+
+    <p><span id="nomedesc" class="nomedesc"></span></p>
+
+    <!--MODAL-->
+    <div class="modal" id="janelamodal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><b>Compra de presente</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><span id="nomedesc" class="nomedesc"></span></p>
+                    <img src="imagens/card1.jpg" class="img-fluid" alt="..." width="50%">
+                    <p><b>Valor: </b><span id="valorpreco" class="preco"></span></p>
+                    <p>O pagamento é em PIX e pode ser realizado atráves da chave ou do código QR abaixo.</p>
+                    <p>A chave PIX é <span id="chavepix">393.881.068-81</span> <a id="copy"><i class="bi bi-link-45deg"></i></a></p>
+                    <img src="imagens/frame.png" alt="QR Code" class="img-fluid" width="40%">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--FIM MODAL-->
+</body>
+<script>
+    const chavePix = document.getElementById('chavepix');
+    const copy = document.getElementById('copy');
+
+    copy.addEventListener('click', () => {
+      const textArea = document.createElement('textarea');
+      textArea.value = chavePix.textContent;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      textArea.remove();
+      alert('Chave copiada com sucesso!');
+    });
+
+    $(document).ready(function(){
+    $("button").click(function(){
+
+    window.location.href = "teste2.html?nomedesc=" + $('#nomedesc').text() + "&valorpreco=" + $('#valorpreco').text();
+
+    });
+    });
+
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+    };
+
+
+    $(document).ready(function(){
+    $('#nomedesc').text(getUrlParameter('nomedesc'));
+    $('#nomedesc').text(getUrlParameter('valorpreco'));
+
+    });
+</script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</html>
